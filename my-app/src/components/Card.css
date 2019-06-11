@@ -1,0 +1,13 @@
+.title-container{
+    position: relative;
+}
+.title-container button{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    right: 0;;
+}
+
+.title-container button:focus{
+  outline:0;
+}
