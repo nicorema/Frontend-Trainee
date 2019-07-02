@@ -1,0 +1,33 @@
+Shadow Dom: Encapsula un DOM escondido y separado al web component.
+	Terminologia:
+		-Shadow host: El nodo del DOM normal al que el shadow Dom esta unido.
+		-Shadow tree: El arbol dentro del shadow DOM.
+		-Shadow boundary: Done el shadow DOM termina y el DOM regular inicia.
+		-Shadow root: El nodo raiz del shadow tree.
+
+Se pueden modificar los elementos del shadow DOM de manera normal. Pero nada del shadow DOM puede modificar el DOM regular (Nada por fuera del boundary).
+
+Se puede adjuntar un shadow root a cualquier elemento usando Element.attachShadow(). Dicha función tiene como parametro un objeto de opciones con la opción mode.
+	- {mode: open} => Se puede acceder al shadow DOM escribiendo js en la pagina principal
+	- {mode: closed} => No se puede sacceder al shadow DOM (Ej: <video> ).
+
+
+
+* Custom Elements:
+
+	Es un objeto que permite registrar un elemento custom a las paginas
+
+	 - Para definir un elemento custom se utiliza:  customElements.define()
+	Este metodo recibe 3 parametros:
+		- nombre del elemento: DOMString (La especificación requiere que tengan un guion my-popup)
+		- funcionalidad: class ( La clase que se encarga de manejar la funcionalidad del elemento)
+		- padre: objeto de opciones con {extends: 'elemento del que hereda'} (opcional)
+
+	- Hay dos tipos de custom elements.
+
+		- Autonomous custom elements: Son standalone, no heredan de elementos HTML ( <popup-info> )
+		- Customized built-in elements: Heredan de elementos HTML (uso : <p is="word-count"> )
+
+* Template: 
+
+	Se pueden usar las etiquetas <template> y <slot> para crear templates que pueden ser usadas para popular el sahdow DOM de un web component
