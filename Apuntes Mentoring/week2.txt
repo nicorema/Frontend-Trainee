@@ -30,4 +30,77 @@ Se puede adjuntar un shadow root a cualquier elemento usando Element.attachShado
 
 * Template: 
 
-	Se pueden usar las etiquetas <template> y <slot> para crear templates que pueden ser usadas para popular el sahdow DOM de un web component
+	Se pueden usar las etiquetas <template> y <slot> para crear templates que pueden ser usadas para popular el shadow DOM de un web component
+
+	<template> => No se renderiza en el DOM pero puede ser referenciado utilizando JS
+	<slot> => Se utiliza para hacer plantillas mas dinamicas.
+			- Dentro del template se crean etiquetas cuyo texto sera remplazado cuando se renderice el template. asi:
+			<slot name="text">Alert</slot> (Si no se envia ningun "text" se mostrara Alert)
+
+			- Dentro del component se llama asi:
+				<span slot="text"> El Valor </span> y en el DOM el slot se remplazara por el span
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BEM: Block Element Modifier
+
+Es una metologia para la creacian de componente reusables y codigo compartible en el desarrollo front end.
+Se trata de una convencion para nombrar las clases que ayuda a hacer el codigo mas facil de leer, comprender, facilita el trabajo, la escablabioliad y lo hace mas robusto, explicito y estricto.
+	
+
+	¿Porque BEM en lugar de otras?
+
+	- Mas clara
+	- Provee un buena base de arquitecutra para codigo.
+	- Usa terminologia mas reconocible
+
+- Block: 
+
+	Entidad standaolne que tiene significado por si misma. (header, container, menu, checkbox)
+
+- Element:
+	
+	Parte de un bloque que no tiene significado por si solo y esta semanticamente vinculada a un bloque. (menu item, list item) {Se deben indicar con dos guiones bajos)
+
+- Modifier:
+	
+	Una bandera en un bloque o un elemento. Usado para cambiar apariencia o comportameinto. (disbaled, big, blue) {se indica con dos guiibes)}
+
+Ej: 
+	.main-menu(bloque)
+	.main-menu__item (elemento)
+	.main-menu--blue (modificador)
+	
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ampersand en SASS:
+
+	Sirve Para.
+
+		-Nesting
+
+			.parent{
+			   & .child{
+
+			    }
+			}
+
+		-Añadir otra clase
+
+			.class1{
+			     &.class2{
+			     
+			     }
+			}
+			
+		-Basar en el contexto
+
+			.input{
+				body.page-about &{
+
+				}
+			}	
