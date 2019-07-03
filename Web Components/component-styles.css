@@ -1,0 +1,10 @@
+[name="text"] {
+ visibility: hidden;
+}
+
+[name="icon"]:hover {
+  cursor: pointer;
+}
+[name="icon"]:hover + [name="text"] {
+  visibility: visible;
+}

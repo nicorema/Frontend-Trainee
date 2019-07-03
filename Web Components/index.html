@@ -1,8 +1,51 @@
-<h1>Web Components</h1>
-<nico-popup 
-    img="http://www.myiconfinder.com/uploads/iconsets/256-256-17554e7753e4b872fb352a7956511f04.png" 
-    text="A Custom Element"
->
-</nico-popup>
+<!DOCTYPE html>
 
-  <script src="app.js"></script>
+<head>
+  <meta charset="utf-8">
+
+  <title>Web Components Practice</title>
+  <meta name="author" content="Nicolas">
+
+</head>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <!-- Defining the template -->
+  <template id="my-template">
+      <link rel="stylesheet" href="component-styles.css">
+    <slot name="icon">
+      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-17554e7753e4b872fb352a7956511f04.png"
+        alt="alert icon" height="42" width="42">
+    </slot>
+    <slot name="text">
+      <p>Alert</p>
+    </slot>
+    </div>
+  </template>
+
+
+  <h1>Web Components</h1>
+  <!-- Using the Components -->
+  <div class="container">
+    <nico-popup>
+
+      <img slot="icon" src="https://image.flaticon.com/icons/png/128/131/131320.png">
+      <p slot="text">BE CAREFUL WITH THE BANANA</p>
+    </nico-popup>
+
+    <nico-popup>
+      <img slot="icon" src="https://discordemoji.com/assets/emoji/PickleRick.gif">
+      <p slot="text">PICKLE RICK!</p>
+    </nico-popup>
+
+    <nico-popup>
+      <p slot="text">CuStOm AlErT</p>
+    </nico-popup>
+
+    <nico-popup></nico-popup>
+  </div>
+  <footer>
+    <script src="app.js"></script>
+  </footer>
+</body>
+
+</html>
