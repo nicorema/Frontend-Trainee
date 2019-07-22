@@ -1,0 +1,79 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url("https://punkblogger.files.wordpress.com/2010/05/adictslogo.jpg");
+    background-repeat:no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+.dabox{
+    border:solid;
+    background: grey;
+    width:10cm;
+    margin: 2em auto;
+    font-size: 24px;
+   
+}
+.dacontainer2{
+    float:right !important;
+}
+.da-container{
+    width:50%;
+    border:solid red;
+    float:left;
+}
+
+.menu-btn{
+    padding:10px;
+    margin-top: 5px;
+    display:inline-block;
+
+}
+.menu-btn,.menu li{
+    background: black;
+    color:white
+}
+.menu{
+    width:160px;
+ }
+.menu.visible{
+    margin-left: 0;
+}
+.menu.hidden{
+    margin-left: -300px;
+}
+.menu li{
+    margin:10px;
+    padding:5px;
+    width:auto;
+}
+.menu li:hover, .menu-btn:hover{
+    cursor: pointer;
+}
+
+form input:focus{
+   background: red;
+}
+.float-test{
+    float:left;
+}
+
+
+.column{
+    width:25%;
+    float:left;
+}
+#footer{
+    width:100%;
+    clear:both;
+}
+ul#botonera li {
+    float: left;
+    margin:20px;
+}
+
+.clear{
+    clear:both;
+}
