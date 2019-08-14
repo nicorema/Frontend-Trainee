@@ -68,6 +68,7 @@ Animation:
 		-Es un comportamiento por defecto en el cual se mueven las declaraciones de variables al inicio del scope actual.
 		-Solo mueve la declaración, no la inicialización
 		- tambien con las funciones pero si son expresiones solo sube la declaración	
+		- Todo lo que hace despues 
 
 
 	Funciones:
@@ -93,8 +94,9 @@ Animation:
 			Funciones:
 
 				-Map: Crea un nuevo arreglo con el resultado de una función invocada en cada elemento	
+				Crea una copia del array original.
 				-Filter: Crea un nuevo arreglo con los elementos que pasen la función filtro.
-				-Reduce: Usa un acumulador para volver ese arreglo un solo elemento	
+				-Reduce: Usa un acumulador para volver ese arreglo un solo elemento.	
 
 		Map: Objetos de vares clave valor.
 		
