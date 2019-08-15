@@ -33,11 +33,20 @@ class App extends Component {
     });
   };
   render() {
+    const style={
+      backgroundColor:"lightgrey",
+      padding:"20px",
+      border:"2px solid black",
+      cursor:'pointer',
+    };
     return (
       <div className="App">
         <h1>Nico's React App</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchAgeHandler}>Swicth Age</button>
+        <button 
+          style={style}
+          onClick={this.switchAgeHandler}>Swicth Age
+        </button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
