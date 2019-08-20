@@ -30,9 +30,9 @@ class App extends Component {
     })
   };
 
-  deletePersonHandler = (personIndex) => {
+  deletePersonHandler = (personID) => {
     let persons = [...this.state.persons];
-    persons.splice(personIndex,1);
+    persons = persons.filter(person => person.id !== personID);
     this.setState({persons: persons})
   };
   render() {
@@ -53,7 +53,7 @@ class App extends Component {
                 key={person.id}
                 name={person.name}
                 age={person.age}
-                click={this.deletePersonHandler.bind(this,index)}
+                click={this.deletePersonHandler.bind(this,person.id)}
                 changeName = {this.nameChangeHandler.bind(this,person.id)}
                 />
             );
