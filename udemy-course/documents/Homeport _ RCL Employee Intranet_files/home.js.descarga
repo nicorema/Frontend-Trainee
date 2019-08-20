@@ -1,0 +1,2 @@
+"use strict";function changeArrow(r,e){$(r).css("display",e)}function eventHandlerArrows(){var r=$(".carousel-item.slick-active").attr("data-slick-index"),e=$(".carousel-item").length-1;0==r?(changeArrow(".arrow-prev","none"),changeArrow(".arrow-next","inline-block")):r==e?(changeArrow(".arrow-prev","inline-block"),changeArrow(".arrow-next","none")):(changeArrow(".arrow-prev","inline-block"),changeArrow(".arrow-next","inline-block"))}var carousel=$(".ecr_wrap");carousel.on("afterChange ",function(){eventHandlerArrows()});
+//# sourceMappingURL=home.js.map

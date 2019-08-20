@@ -1,0 +1,228 @@
+(function() {
+	if (window.WDWidgetsLoaded)
+		return;
+	
+	window.WDWidgetsLoaded = true;
+	
+	// Identify the widgets host path for additional scripts and style sheets
+	var this_script;
+	var script_host;
+	var scripts = document.getElementsByTagName("script");
+	for (var script_index = 0; script_index < scripts.length; ++script_index) {
+		var src = scripts[script_index].src;
+		if (src && /\/js\/wd_widgets\.js$/.test(src)) {
+			this_script = scripts[script_index];
+			script_host = src.replace("/js/wd_widgets.js","");
+			break;
+		}
+	}
+	
+	// Scripts and callbacks to be executed when encountered
+	var script_queue = [];
+	// Scripts and callbacks to be executed after all widgets are loaded
+	var atEnd_scripts = [];
+	// Scripts that have been executed
+	var scripts_loaded = {};
+	// Are we waiting for a script to load?
+	var script_active = false;
+	
+	// Stolen from jQuery.globalEval to evaluate a script in the global context
+	function evalScript(source) {
+		(window.execScript || function(source) {
+			window.eval.call(window, source);
+		})(source);
+	}
+	
+	function loadScript(script) {
+		var url = script.url;
+		if (url.indexOf("://") < 0)
+			url = script_host+"/"+url;
+		
+		var my_script = script;
+		
+		// There is still a chance that this script may not get executed before the next script that requires it.
+		// If that becomes an issue, we can write a little JSONP wrapper to load and evaluate the script contents directly.
+		var obj = document.createElement("script");
+		obj.type = "text/javascript";
+		obj.src = url;
+		obj.onload = function() {scriptDone(my_script);};
+		this_script.parentNode.insertBefore(obj, this_script);
+	}
+	
+	function scriptDone(script) {
+		script_active = false;
+		
+		if (script.id)
+			scripts_loaded[script.id] = true;
+		
+		if (script.callback)
+			script.callback();
+		
+		if (script.pushed)
+			webDriver.pop_jQuery();
+		
+		evalNextScript();
+	}
+
+	function evalNextScript() {
+		if (script_queue.length == 0)
+			return;
+		
+		var script = script_queue.shift();
+		
+		if (window.webDriver) {
+			webDriver.push_jQuery();
+			script.pushed = true;
+		}
+		
+		script_active = false;
+		if (!script.id || !scripts_loaded[script.id]) {
+			if (script.url) {
+				script_active = true;
+				loadScript(script);
+			} else if (script.code) {
+				evalScript(script.code);
+			}
+		}
+		
+		if (!script_active)
+			scriptDone(script);
+	}
+	
+	function queueScript(script) {
+		script_queue.push(script);
+		
+		if (script_queue.length == 1 && !script_active)
+			evalNextScript();
+	}
+	
+	function addScript(id, script) {
+		script.id = id;
+		if (script.atEnd)
+			atEnd_scripts.push(script);
+		else
+			queueScript(script);
+	}
+	
+	// Number of widgets and styles waiting to be loaded
+	var items_pending = 0;
+
+	function itemDone() {
+		if (--items_pending == 0) {
+			while (atEnd_scripts.length > 0) {
+				var script = atEnd_scripts.shift();
+				queueScript(script);
+			}
+		}
+	}
+	
+	var $last_style = null;
+	var styles_loaded = {};
+	
+	function styleLoaded(id) {
+		if (styles_loaded[id] !== true) {
+			clearTimeout(styles_loaded[id]);
+			styles_loaded[id] = true;
+			itemDone();
+		}
+	}
+		
+	function loadStyle(id, style) {
+		if (!(id in styles_loaded)) {
+			var $ = webDriver.jQuery;
+			var $obj;
+			if (style.url) {
+				var url = style.url;
+				if (url.indexOf("://") < 0)
+					url = script_host+"/"+url;
+				$obj = $("<link>");
+				$obj.attr({
+					href: url,
+					type: "text/css",
+					rel: "stylesheet"
+				});
+				
+				var myID = id;
+				items_pending++;
+				styles_loaded[id] = setTimeout(function () {styleLoaded(myID);}, 2000);
+				$obj.on("load", function() {styleLoaded(myID);});
+			} else {
+				$obj = $("<style></style>");
+				$obj.attr("type", "text/css");
+				$obj.append(style.code);
+				styles_loaded[id] = true;
+			}
+
+			if ($last_style) {
+				$obj.insertAfter($last_style);
+			} else {
+				var $head = $("head");
+				if ($head.length > 0)
+					$head.prepend($obj);
+				else
+					$("body").prepend($obj);
+			}
+	
+			$last_style = $obj;
+		}
+	}
+	
+	function loadWidgets () {
+		var $ = webDriver.jQuery;
+		
+		$(function() {
+			var $widgets = $(".wd_widget");
+			items_pending += $widgets.length;
+			$widgets.each(function() {
+				var $this = $(this);
+				var key = $this.data("wd_widget-id");
+				var host = $this.data("wd_widget-host") || script_host;
+				if (key) {
+					$.jsonp({
+						url: host + "/widget/" + key,
+						callbackParameter: "callback",
+						success: function(data) {
+							var theme = $this.data("wd_widget-theme") || data.theme;
+							if (theme)
+								loadStyle("wd_widget-theme-"+theme, {url: "css/widgets/themes/"+theme+".css"});
+
+							if (data.styles) {
+								$.each(data.styles, function(id, style) {
+									loadStyle(id, style);
+								});
+							}
+
+							var loadContent = function() {
+								if (theme)
+									$this.addClass("wd_widget-theme-"+theme);
+								if (data.content)
+									$this.html(data.content);
+							}
+
+							if (data.scripts) {
+								$.each(data.scripts, addScript);
+								addScript(false, {callback: loadContent});
+							} else {
+								loadContent();
+							}
+						},
+						error: function(xhr, status, error) {
+							$this.html("ERROR: unable to load widget: "+status+" "+error);
+						},
+						complete: function() {
+							itemDone();
+						}
+					});
+				} else {
+					$this.html("ERROR: no widget ID specified");
+					itemDone();
+				}
+			});
+		});
+	}
+	
+	addScript("jquery-webdriver.js", {url: "js/jquery-webdriver.js"});
+	addScript("webdriver.js", {url: "js/webdriver.js"});
+	addScript("jquery.jsonp.js", {url: "js/jquery.jsonp.js"});
+	addScript(false, {callback: loadWidgets});
+})();
