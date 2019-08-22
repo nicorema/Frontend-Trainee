@@ -1,0 +1,21 @@
+.CockPit button{
+    background-color: green;
+    color: white;
+    padding: 20px;
+    border: 2px solid black;
+    cursor: pointer;    
+}
+
+.CockPit button:hover{
+    background-color: lightgreen;
+    color:black;
+}
+
+.CockPit > button.red{
+    background-color: red;
+}
+
+.CockPit > button.red:hover{
+    background-color: lightsalmon;
+    color:black;
+}
