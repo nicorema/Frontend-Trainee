@@ -3,6 +3,11 @@ import "./App.css";
 import PersonList from "../Components/PersonList/PersonList";
 import CockPit from "../Components/PersonList/CockPit/CockPit";
 class App extends Component {
+  constructor(props){
+    super(props);
+    console.log('[App.js] Constructor')
+    
+  }
   state = {
     persons: [
       { id: "1", name: "Max", age: 23 },
@@ -12,6 +17,15 @@ class App extends Component {
     ],
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props,state){
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount')
+  }
 
   togglePersonsHandler = () => {
     this.setState({
@@ -39,6 +53,7 @@ class App extends Component {
     this.setState({ persons: persons });
   };
   render() {
+    console.log('[App.js] render')
     let personsList = null;
     if (this.state.showPersons) {
       personsList = (
