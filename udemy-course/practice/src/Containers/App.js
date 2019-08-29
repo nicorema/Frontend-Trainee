@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import PersonList from "../Components/PersonList/PersonList";
-import CockPit from "../Components/PersonList/CockPit/CockPit";
+import CockPit from "../Components/CockPit/CockPit";
 class App extends Component {
   constructor(props){
     super(props);
@@ -25,6 +25,14 @@ class App extends Component {
 
   componentDidMount(){
     console.log('[App.js] componentDidMount')
+  }
+
+  shouldComponentUpdate(nexrProps,nextState){
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+  componentDidUpdate(){
+    console.log("[App.js] componentDidUpdate");
   }
 
   togglePersonsHandler = () => {
@@ -70,6 +78,7 @@ class App extends Component {
         title="Nico's React APP"
         toggledBtn = {this.state.showPersons}
         clickBtn = {this.togglePersonsHandler}
+        persons = {this.state.persons}
       />
     )
     return (

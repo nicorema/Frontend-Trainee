@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import './CockPit.css';
 
 const CockPit = (props) => {
+
+    useEffect( () => {
+        console.log('[Cockpit.js] useffect')
+        setTimeout(()=>{
+            alert("Saved data to cloud")
+        },1000);
+    } , []);
     let classes =[];
     if(props.toggledBtn){
         classes.push('red');
