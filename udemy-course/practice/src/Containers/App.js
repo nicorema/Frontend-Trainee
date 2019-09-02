@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import PersonList from "../Components/PersonList/PersonList";
-import CockPit from "../Components/CockPit/CockPit";
+import CockPit from "../Components/Cockpit/CockPit";
 class App extends Component {
   constructor(props){
     super(props);

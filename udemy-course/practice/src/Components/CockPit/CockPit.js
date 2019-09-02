@@ -26,4 +26,4 @@ const CockPit = (props) => {
     );
 }
 
-export default CockPit;
+export default React.memo(CockPit);
