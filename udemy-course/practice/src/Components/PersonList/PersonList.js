@@ -4,7 +4,6 @@ import "./PersonList.css";
 
 class PersonList extends Component {
   render() {
-    console.log("[PersonList.js] rendering");
     return (
       <ul className="PersonList">
         {this.props.persons.map(person => (

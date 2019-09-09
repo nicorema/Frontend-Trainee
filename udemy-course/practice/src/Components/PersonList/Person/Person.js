@@ -1,41 +1,41 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Person.css";
 import NoSemanticCointainer from "../../../hoc/NoSemanticContainer";
+import withClass from "../../../hoc/withClass";
 class Person extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("[Person.js] shouldComponentUpdate");
-    return true;
+  constructor(props) {
+    super(props);
+    this.componentRef = React.createRef();
   }
 
-  getSnapshotBeforeUpdate(prev, prevstate) {
-    console.log("[Person.js] getSnapShotBeforeUpdate");
-    return { message: "snapshot" };
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("[Person.js]componentDidUpdate");
-    console.log(snapshot);
-  }
   render() {
-    console.log("[Person.js] rendering");
     return (
       <NoSemanticCointainer>
-        <li className="Person">
-          <p>
-            I'm {this.props.name} and I am {this.props.age} years old
-          </p>
-          <p>{this.props.children}</p>
-          <input
-            type="text"
-            onChange={this.props.changeName}
-            value={this.props.name}
-          />
-          <button onClick={this.props.click}>Delete Me</button>
-        </li>
-        <p>Bro</p>
+        <p>
+          I'm {this.props.name} and I am {this.props.age} years old
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type="text"
+          onChange={this.props.changeName}
+          value={this.props.name}
+          ref={this.componentRef}
+        />
+        <button onClick={this.props.click}>Delete Me</button>
       </NoSemanticCointainer>
     );
   }
-}
 
-export default Person;
+  componentDidMount() {
+    this.componentRef.current.focus();
+  }
+}
+Person.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changeName: PropTypes.func,
+  click: PropTypes.func
+};
+
+export default withClass(Person, "Person");

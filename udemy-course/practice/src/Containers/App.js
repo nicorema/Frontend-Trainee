@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import PersonList from "../Components/PersonList/PersonList";
 import CockPit from "../Components/Cockpit/CockPit";
+import withClass from "../hoc/withClass";
+import NoSemanticCointainer from "../hoc/NoSemanticContainer";
 class App extends Component {
-  constructor(props){
-    super(props);
-    console.log('[App.js] Constructor')
-    
-  }
   state = {
     persons: [
       { id: "1", name: "Max", age: 23 },
@@ -15,25 +12,9 @@ class App extends Component {
       { id: "3", name: "Caro", age: 21 },
       { id: "4", name: "Lance", age: 30 }
     ],
-    showPersons: false
+    showPersons: false,
+    changeCounter: 0
   };
-
-  static getDerivedStateFromProps(props,state){
-    console.log('[App.js] getDerivedStateFromProps', props);
-    return state;
-  }
-
-  componentDidMount(){
-    console.log('[App.js] componentDidMount')
-  }
-
-  shouldComponentUpdate(nexrProps,nextState){
-    console.log("[App.js] shouldComponentUpdate");
-    return true;
-  }
-  componentDidUpdate(){
-    console.log("[App.js] componentDidUpdate");
-  }
 
   togglePersonsHandler = () => {
     this.setState({
@@ -50,8 +31,11 @@ class App extends Component {
     let persons = [...this.state.persons];
     persons[singlePersonIndex] = singlePerson;
 
-    this.setState({
-      persons: persons
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
     });
   };
 
@@ -61,33 +45,32 @@ class App extends Component {
     this.setState({ persons: persons });
   };
   render() {
-    console.log('[App.js] render')
     let personsList = null;
     if (this.state.showPersons) {
       personsList = (
-        <PersonList 
-        persons={this.state.persons}
-        deletePerson = {this.deletePersonHandler}       
-        changeName = {this.nameChangeHandler} 
+        <PersonList
+          persons={this.state.persons}
+          deletePerson={this.deletePersonHandler}
+          changeName={this.nameChangeHandler}
         />
       );
     }
-  
+
     const cockPit = (
-      <CockPit 
+      <CockPit
         title="Nico's React APP"
-        toggledBtn = {this.state.showPersons}
-        clickBtn = {this.togglePersonsHandler}
-        persons = {this.state.persons}
+        toggledBtn={this.state.showPersons}
+        clickBtn={this.togglePersonsHandler}
+        persons={this.state.persons}
       />
-    )
+    );
     return (
-      <div className="App">
+      <NoSemanticCointainer>
         {cockPit}
         {personsList}
-      </div>
+      </NoSemanticCointainer>
     );
   }
 }
 
-export default App;
+export default withClass(App, "App");

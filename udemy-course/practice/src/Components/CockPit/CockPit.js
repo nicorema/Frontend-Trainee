@@ -1,14 +1,15 @@
-import React, { useEffect }from 'react';
+import React ,{useEffect, useRef} from 'react';
 import './CockPit.css';
 
 const CockPit = (props) => {
 
-    useEffect( () => {
-        console.log('[Cockpit.js] useffect')
-        setTimeout(()=>{
-            alert("Saved data to cloud")
-        },1000);
-    } , []);
+    const componentRef = useRef(null);
+
+    useEffect( ()=> {
+        componentRef.current.click();
+       
+    },[]);
+
     let classes =[];
     if(props.toggledBtn){
         classes.push('red');
@@ -18,6 +19,7 @@ const CockPit = (props) => {
             <h1>{props.title}</h1>
             <p>This is really working!</p>
             <button 
+                ref = {componentRef}
                 className = {classes.join(' ')}
                 onClick={props.clickBtn}>
                 Toggle Persons
