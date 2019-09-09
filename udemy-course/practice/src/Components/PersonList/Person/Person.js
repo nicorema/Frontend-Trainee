@@ -11,12 +11,12 @@ class Person extends Component {
     this.componentRef = React.createRef();
   }
 
+  static contextType = AuthContext;
+
   render() {
     return (
       <NoSemanticCointainer>
-        <AuthContext.Consumer>
-          {(context) => context.authenticaded ? <p>Authenticated</p> : <p>Please Log In</p>}
-        </AuthContext.Consumer>
+        {this.context.authenticaded ? <p>Authenticated</p> : <p>Please Log In</p>}
         <p>
           I'm {this.props.name} and I am {this.props.age} years old
         </p>
@@ -34,6 +34,7 @@ class Person extends Component {
 
   componentDidMount() {
     this.componentRef.current.focus();
+    console.log(this.context.authenticaded);
   }
 }
 Person.propTypes = {

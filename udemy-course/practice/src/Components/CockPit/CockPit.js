@@ -1,10 +1,11 @@
-import React ,{useEffect, useRef} from 'react';
+import React,{useEffect, useRef, useContext} from 'react';
 import './CockPit.css';
 import AuthContext from '../../Context/auth-context';
 
 const CockPit = (props) => {
 
     const componentRef = useRef(null);
+    const authContext = useContext(AuthContext);
 
     useEffect( ()=> {
         componentRef.current.click();
@@ -25,9 +26,7 @@ const CockPit = (props) => {
                 onClick={props.clickBtn}>
                 Toggle Persons
             </button>
-            <AuthContext.Consumer>
-               {(context) => <button onClick={context.login}>Log In</button>}
-            </AuthContext.Consumer>
+            <button onClick={authContext.login}>Log In</button>
         </section>
     );
 }
