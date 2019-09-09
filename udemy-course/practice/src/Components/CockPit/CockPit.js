@@ -1,5 +1,6 @@
 import React ,{useEffect, useRef} from 'react';
 import './CockPit.css';
+import AuthContext from '../../Context/auth-context';
 
 const CockPit = (props) => {
 
@@ -24,6 +25,9 @@ const CockPit = (props) => {
                 onClick={props.clickBtn}>
                 Toggle Persons
             </button>
+            <AuthContext.Consumer>
+               {(context) => <button onClick={context.login}>Log In</button>}
+            </AuthContext.Consumer>
         </section>
     );
 }

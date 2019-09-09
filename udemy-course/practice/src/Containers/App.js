@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import "./App.css";
 import PersonList from "../Components/PersonList/PersonList";
 import CockPit from "../Components/Cockpit/CockPit";
-import withClass from "../hoc/withClass";
-import NoSemanticCointainer from "../hoc/NoSemanticContainer";
+import withClass from "../Hoc/withClass";
+import NoSemanticCointainer from "../Hoc/NoSemanticContainer";
+import AuthContext from '../Context/auth-context'
+
 class App extends Component {
   state = {
     persons: [
@@ -13,7 +15,8 @@ class App extends Component {
       { id: "4", name: "Lance", age: 30 }
     ],
     showPersons: false,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   togglePersonsHandler = () => {
@@ -44,6 +47,10 @@ class App extends Component {
     persons = persons.filter(person => person.id !== personID);
     this.setState({ persons: persons });
   };
+
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
   render() {
     let personsList = null;
     if (this.state.showPersons) {
@@ -52,6 +59,7 @@ class App extends Component {
           persons={this.state.persons}
           deletePerson={this.deletePersonHandler}
           changeName={this.nameChangeHandler}
+          isAuthenticated = {this.state.authenticated}
         />
       );
     }
@@ -65,10 +73,12 @@ class App extends Component {
       />
     );
     return (
-      <NoSemanticCointainer>
-        {cockPit}
-        {personsList}
-      </NoSemanticCointainer>
+      <AuthContext.Provider value={{ authenticaded: this.state.authenticated ,  login: this.loginHandler}}>
+        <NoSemanticCointainer>
+          {cockPit}
+          {personsList}
+        </NoSemanticCointainer>
+      </AuthContext.Provider>
     );
   }
 }
