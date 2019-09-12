@@ -1,6 +1,11 @@
 .Burger{
-    width: 400px;
-    margin: auto;
+    width: 200px;
     height: 250px;
+    margin-right: 50px;
+}
+
+.Burger p{
+    font-size: 15px;
+    font-weight: bold;
     text-align: center;
 }

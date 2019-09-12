@@ -1,0 +1,34 @@
+
+.BuildControl h2{
+    margin:10px 0;
+    text-transform: capitalize;
+    font-size: 22px;
+}
+.BuildControl button{
+    border:0;
+    background: 0;
+    cursor: pointer;
+    margin: 0 3px;
+    outline:none;
+    padding: 0;
+}
+.add{
+    color:lightgreen;
+}
+.add:hover{
+    color:#228c1d;
+}
+
+.remove{
+    color:lightsalmon;
+}
+.remove:hover{
+    color:#d44107;
+}
+
+button:disabled .remove{
+    color:gray;
+}
+button:disabled{
+    cursor: auto;
+}
