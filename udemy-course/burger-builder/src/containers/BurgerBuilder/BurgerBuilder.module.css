@@ -1,0 +1,8 @@
+.TotalPrice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    background: mediumseagreen;
+    margin-right: 45px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import classes from "./BurgerBuilder.module.css";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -50,6 +51,10 @@ class BurgerBuilder extends Component {
     console.log(disabledInfo);
     return (
       <>
+        <div className = {classes.TotalPrice}>
+          <label>Current Price</label>
+          <strong>{'$'+this.state.totalPrice.toFixed(2)}</strong>
+        </div>
         <Burger ingredients={this.state.ingredients}></Burger>
         <BuildControls
           addingIngredient={this.addIngredientHandler}
