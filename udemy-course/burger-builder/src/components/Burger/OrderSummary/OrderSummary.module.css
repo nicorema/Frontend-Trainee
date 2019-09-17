@@ -1,0 +1,7 @@
+.TableOrder td,.TableOrder th {
+    padding: 0 15px;
+}
+
+.TableOrder th{
+    margin-bottom: 10px;
+}

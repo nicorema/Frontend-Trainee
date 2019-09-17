@@ -3,6 +3,43 @@
     flex-direction: column;
     align-items: center;
     height: fit-content;
-    background: mediumseagreen;
-    margin-right: 45px;
+    background: lightgoldenrodyellow;
+    flex-basis: 100%;
+    height: 50px;
+    justify-content: center;
+    font-size: 18px;
+}
+.OrderBtn{
+    flex-basis: 100%;
+    cursor:pointer;
+    padding: 0;
+    border:0;
+    background: lightseagreen;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 35% 40px;
+    outline: 0;
+    outline: 0;
+}
+
+.OrderBtn:disabled{
+    background: grey;
+    color:rgba(255, 255, 255, 0.219); 
+    animation: disable 0.3s linear;
+}
+
+.OrderBtn:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+@keyframes enable {
+    from {background:gray;}
+    to{background: lightseagreen;}
+}
+
+
+@keyframes disable {
+    from {background:lightseagreen;}
+    to{background: gray;}
 }
