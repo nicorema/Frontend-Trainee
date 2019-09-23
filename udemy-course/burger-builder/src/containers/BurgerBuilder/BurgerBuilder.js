@@ -58,6 +58,11 @@ class BurgerBuilder extends Component {
     this.setState({showModal:true})
   }
 
+  closeModal = () =>{
+    console.log("hola");
+    this.setState({showModal:false});
+  }
+
   render() {
     const disabledInfo = {
       ...this.state.ingredients
@@ -67,7 +72,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <>
-        <Modal show={this.state.showModal}>
+        <Modal show={this.state.showModal} closeModal={this.closeModal.bind(this)}>
           <OrderSummary ingredients={this.state.ingredients}/>
         </Modal>
         <div className={classes.TotalPrice}>

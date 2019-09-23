@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./Modal.module.css";
+import Backdrop from "../Backdrop/Backdrop";
 const Modal = props => (
+  <>
   <div
     className={classes.Modal}
     style={{
@@ -10,5 +12,7 @@ const Modal = props => (
   >
     {props.children}
   </div>
+    <Backdrop show={props.show} closeModal={props.closeModal}/>
+  </>
 );
 export default Modal;

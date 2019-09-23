@@ -1,5 +1,7 @@
 import React from "react";
 import classes from "./OrderSummary.module.css";
+import Button from "../../UI/Button/Button";
+
 const OrderSummary = props => {
   const ingredientSummary = Object.keys(props.ingredients).map((key, index) => {
     return (
@@ -17,13 +19,17 @@ const OrderSummary = props => {
       <table className={classes.TableOrder}>
         <tbody>
           <tr>
-            <th>Ingredient Name</th>
+            <th>Ingredient:</th>
             <th>Quantity</th>
           </tr>
           {ingredientSummary}
         </tbody>
       </table>
-      <p>Continue to checkout</p>
+      <p>Continue to checkout?</p>
+      <div className={classes.Buttons}>
+        <Button buttonClass="confirm">Cancel</Button>
+        <Button buttonClass="cancel">Checkout</Button>
+      </div>
     </>
   );
 };

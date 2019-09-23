@@ -7,4 +7,5 @@
     top: 20%;
     padding: 30px 60px;
     transition: all 0.3s ease-out;
+    z-index: 200;
 }

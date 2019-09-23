@@ -1,0 +1,15 @@
+.Button {
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  background: 0;
+  outline: 0;
+}
+
+.Button.confirm {
+  background: yellowgreen;
+}
+
+.Button.cancel {
+  background: #e24d4d;
+}

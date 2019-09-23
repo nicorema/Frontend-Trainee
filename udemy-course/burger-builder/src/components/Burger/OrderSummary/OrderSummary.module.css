@@ -5,3 +5,8 @@
 .TableOrder th{
     margin-bottom: 10px;
 }
+
+.Buttons{
+    display:flex;
+    justify-content: space-between;
+}
