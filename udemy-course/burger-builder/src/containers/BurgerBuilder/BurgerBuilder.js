@@ -4,6 +4,7 @@ import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import classes from "./BurgerBuilder.module.css";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import Button from "../../components/UI/Button/Button";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -22,7 +23,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4,
     purchaseable: false,
-    showModal:false,
+    purchasing: false
   };
 
   addIngredientHandler = type => {
@@ -54,14 +55,17 @@ class BurgerBuilder extends Component {
     newState.purchaseable = isPurshasable;
   }
 
-  showModalHandler= () => {
-    this.setState({showModal:true})
-  }
+  purchasingHandler = () => {
+    this.setState({ purchasing: true });
+  };
 
-  closeModal = () =>{
-    console.log("hola");
-    this.setState({showModal:false});
-  }
+  cancelPurchasingModal = () => {
+    this.setState({ purchasing: false });
+  };
+
+  purchaseContinueHandler = () => {
+    alert("continue");
+  };
 
   render() {
     const disabledInfo = {
@@ -72,20 +76,28 @@ class BurgerBuilder extends Component {
     }
     return (
       <>
-        <Modal show={this.state.showModal} closeModal={this.closeModal.bind(this)}>
-          <OrderSummary ingredients={this.state.ingredients}/>
+        <Modal
+          show={this.state.purchasing}
+          closeModal={this.cancelPurchasingModal.bind(this)}
+        >
+          <OrderSummary
+            totalPrice = {this.state.totalPrice}
+            ingredients={this.state.ingredients}
+            cancel={this.cancelPurchasingModal.bind(this)}
+            continue={this.purchaseContinueHandler.bind(this)}
+          />
         </Modal>
         <div className={classes.TotalPrice}>
           <label>Current Price</label>
           <strong>{"$" + this.state.totalPrice.toFixed(2)}</strong>
         </div>
-        <button
-          disabled={!this.state.purchaseable}
-          className={classes.OrderBtn}
-          onClick = {this.showModalHandler}
+        <Button
+          buttonDisabled={!this.state.purchaseable}
+          buttonClass="OrderBtn"
+          click={this.purchasingHandler}
         >
           Order now
-        </button>
+        </Button>
 
         <Burger ingredients={this.state.ingredients}></Burger>
         <BuildControls

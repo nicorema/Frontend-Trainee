@@ -4,6 +4,7 @@
   cursor: pointer;
   background: 0;
   outline: 0;
+  border-color:lightslategray;
 }
 
 .Button.confirm {
@@ -12,4 +13,39 @@
 
 .Button.cancel {
   background: #e24d4d;
+}
+
+.OrderBtn{
+  flex-basis: 100%;
+  cursor:pointer;
+  padding: 0;
+  border:0;
+  background: lightseagreen;
+  height: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 35% 40px;
+  outline: 0;
+  outline: 0;
+}
+
+.OrderBtn:disabled{
+  background: grey;
+  color:rgba(255, 255, 255, 0.219); 
+  animation: disable 0.3s linear;
+}
+
+.OrderBtn:not(:disabled) {
+  animation: enable 0.3s linear;
+}
+
+@keyframes enable {
+  from {background:gray;}
+  to{background: lightseagreen;}
+}
+
+
+@keyframes disable {
+  from {background:lightseagreen;}
+  to{background: gray;}
 }

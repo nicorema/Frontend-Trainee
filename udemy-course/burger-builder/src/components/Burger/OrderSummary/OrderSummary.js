@@ -24,11 +24,23 @@ const OrderSummary = props => {
           </tr>
           {ingredientSummary}
         </tbody>
+        <tfoot>
+          <tr>
+            <td style={{ fontWeight: "bold", textDecoration: "underline" }}>
+              Total
+            </td>
+            <td>{"$" + props.totalPrice.toFixed(2)}</td>
+          </tr>
+        </tfoot>
       </table>
       <p>Continue to checkout?</p>
       <div className={classes.Buttons}>
-        <Button buttonClass="confirm">Cancel</Button>
-        <Button buttonClass="cancel">Checkout</Button>
+        <Button buttonClass="cancel" click={props.cancel}>
+          Cancel
+        </Button>
+        <Button buttonClass="confirm" click={props.continue}>
+          Checkout
+        </Button>
       </div>
     </>
   );
