@@ -1,4 +1,11 @@
 .BuildControls{
     display: flex;
     flex-flow: column;
+    flex-basis: 100%;
+}
+
+@media (min-width: 500px) {
+    .BuildControls{
+        flex-basis: auto;
+    }
 }

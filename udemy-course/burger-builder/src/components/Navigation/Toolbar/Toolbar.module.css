@@ -1,24 +1,33 @@
-.Toolbar{
-    height: 60px;
-    width: 100%;
-    position: fixed;
-    top:0;
-    left:0;
-    background-color: #c15711;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 90;
+.Toolbar {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #c15711;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 90;
 }
 
-.Logo{
-    height: 100%;
+.Logo {
+  height: 100%;
 }
-.DesktopOnly{
-    display:none;
+.DesktopOnly {
+  display: none;
 }
-@media(min-width:500px){
-    .DesktopOnly{
-        display:contents;
-    }
+@media (min-width: 500px) {
+  .DesktopOnly {
+    display: contents;
+  }
+}
+
+.MobileOnly {
+  display: contents;
+}
+@media (min-width: 500px) {
+  .MobileOnly {
+    display: none;
+  }
 }
