@@ -3,16 +3,14 @@ import classes from "./OrderSummary.module.css";
 import Button from "../../UI/Button/Button";
 
 const OrderSummary = props => {
-  const ingredientSummary = Object.keys(props.ingredients).map(
-    (key, index) => {
-      return (
-        <tr key={index}>
-          <td style={{ textTransform: "capitalize" }}>{key}</td>
-          <td>{props.ingredients[key]}</td>
-        </tr>
-      );
-    }
-  );
+  const ingredientSummary = Object.keys(props.ingredients).map((key, index) => {
+    return (
+      <tr key={index}>
+        <td style={{ textTransform: "capitalize" }}>{key}</td>
+        <td>{props.ingredients[key]}</td>
+      </tr>
+    );
+  });
 
   return (
     <>
