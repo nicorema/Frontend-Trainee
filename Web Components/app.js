@@ -8,6 +8,10 @@ class PopUpInfo extends HTMLElement {
         
     }
 
+    connectedCallback(){
+        const graph = this.getAttribute('graph');
+    }
+
 }
 
 //Registering the element
