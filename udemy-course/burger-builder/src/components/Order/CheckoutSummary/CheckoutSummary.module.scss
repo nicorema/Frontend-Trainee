@@ -1,0 +1,27 @@
+.CheckoutSummary {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  @media screen and (max-width: 600px) {
+    width: 500px;
+  }
+  .Burger{
+    height: 450px;
+    width:450px;
+   text-align: center;
+    > div{
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    }
+  }
+  .wrapper{
+    display:flex;
+    button{
+      height: 64px;
+      margin:0 1px;
+      padding: 20px;
+      font-weight: bold;
+    }
+  }
+}
