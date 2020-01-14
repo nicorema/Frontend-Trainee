@@ -1,24 +1,32 @@
-.InputContainer{
-    width: 100%;
-    padding: 10px;
-    label{
-        font-weight: bold;
-        display: block;
-        margin-bottom: 8px;
-        text-transform: capitalize;
-        text-align: left;
+.InputContainer {
+  width: 100%;
+  padding: 10px;
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+    text-align: left;
+  }
+  .InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 6px 10px;
+    display: block;
+    width: 95%;
+    margin: 0;
+    &:focus {
+      outline: none;
+      background: lightgray;
     }
-    .InputElement{
-        outline:none;
-        border:1px solid #ccc;
-        background: white;
-        padding: 6px 10px;
-        display: block;
-        width:95%;
-        margin:0;
-        &:focus{
-            outline: none;
-            background: lightgray;
-        }
-     }
+    &.Invalid {
+      border: 1px solid red;
+      background-color: rgba(250, 128, 114, 0.747);
+    }
+  }
+  .ValidationError {
+    color: red;
+    margin: 5px 0;
+  }
 }
