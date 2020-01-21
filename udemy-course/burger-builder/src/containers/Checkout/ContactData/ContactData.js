@@ -4,6 +4,7 @@ import classes from "./ContactData.module.scss";
 import axios from "../../../axios-orders";
 import Loader from "../../../components/UI/Loader/Loader";
 import Input from "../../../components/UI/Form/Input/Input";
+import {connect} from "react-redux";
 class ContactData extends Component {
   state = {
     orderForm: {
@@ -109,7 +110,7 @@ class ContactData extends Component {
         <h4>Enter your contact data</h4>
         <form onSubmit={this.orderHandler}>
           {inputs}
-          <Button buttonClass="confirm" disabled={!this.state.formIsValid}>
+          <Button buttonClass="confirm" buttonDisabled={!this.state.formIsValid}>
             Send
           </Button>
         </form>
@@ -193,4 +194,11 @@ class ContactData extends Component {
   };
 }
 
-export default ContactData;
+const mapStateToProps = state =>{
+  return{
+    ingredients: state.ingredients,
+    price:state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ContactData);

@@ -4,7 +4,7 @@ import axios from "../../axios-orders";
 import WithErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler";
 class Orders extends Component {
   state = {
-    orders: [],
+    orders: [], //redux , but later
     loading: true
   };
   componentDidMount() {
