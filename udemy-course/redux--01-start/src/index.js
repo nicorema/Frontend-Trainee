@@ -10,6 +10,8 @@ import resultsReducer from "./store/reducers/results";
 
 import { Provider } from "react-redux";
 
+import thunk from "redux-thunk";
+
 const logger = store => {
   return next => {
     return action => {
@@ -29,7 +31,7 @@ const rootReducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(logger))
+  composeEnhancers(applyMiddleware(logger, thunk))
 );
 
 ReactDOM.render(
