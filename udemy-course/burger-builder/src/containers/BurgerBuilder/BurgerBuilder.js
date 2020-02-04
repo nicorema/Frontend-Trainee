@@ -10,38 +10,23 @@ import axios from "../../axios-orders";
 import WithErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler";
 
 import { connect } from "react-redux";
-import {
-  addIngredient,
-  removeIngredient
-} from "../../store/actions/burgerBuilder";
+import * as burgerBuilderactions from "../../store/actions/index";
 class BurgerBuilder extends Component {
   state = {
-    purchasing: false,
-    loading: false,
-    error: false
+    purchasing: false
   };
 
   componentDidMount() {
-    // axios
-    //   .get("/ingredients.json")
-    //   .then(response => {
-    //     this.onSettingIngredients(response.data)
-    //     this.setState({
-    //       ingredients: response.data
-    //     });
-    //     if (this.props.ingredients.every(item => item === 0)) {
-    //       this.setState({
-    //         purchaseable: true
-    //       });
-    //     }
-    //   })
-    //   .catch(error => this.setState({ error: true }));
+    this.props.onInitIngredients();
   }
 
   updatePurchaseState() {
-    let isPurshasable = !Object.values(this.props.ingredients).every(
-      value => value === 0
-    );
+    let isPurshasable = false;
+    if (this.props.ingredients) {
+      isPurshasable = !Object.values(this.props.ingredients).every(
+        value => value === 0
+      );
+    }
     return isPurshasable;
   }
 
@@ -64,7 +49,7 @@ class BurgerBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] > 0 ? false : true;
     }
-    let burger = this.state.error ? <p>Fatal Error</p> : <Loader></Loader>;
+    let burger = this.props.error ? <p>Fatal Error</p> : <Loader></Loader>;
     let orderSummaryInfo = null;
     if (this.props.ingredients) {
       burger = (
@@ -85,10 +70,6 @@ class BurgerBuilder extends Component {
           continue={this.purchaseContinueHandler}
         />
       );
-    }
-
-    if (this.state.loading) {
-      orderSummaryInfo = <Loader></Loader>;
     }
 
     return (
@@ -119,14 +100,19 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    error: state.error,
+    ingredients: state.ingredients
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: ingType => dispatch(addIngredient(ingType)),
-    onRemoveIngredient: ingType => dispatch(removeIngredient(ingType))
+    onAddIngredient: ingType =>
+      dispatch(burgerBuilderactions.addIngredient(ingType)),
+    onRemoveIngredient: ingType =>
+      dispatch(burgerBuilderactions.removeIngredient(ingType)),
+    onInitIngredients: () => dispatch(burgerBuilderactions.initIngredients())
   };
 };
 
