@@ -4,7 +4,7 @@ import "./Person.css";
 import NoSemanticCointainer from "../../../Hoc/NoSemanticContainer";
 import withClass from "../../../Hoc/withClass";
 import AuthContext from "../../../Context/auth-context";
-
+import styled from "styled-components";
 class Person extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +14,22 @@ class Person extends Component {
   static contextType = AuthContext;
 
   render() {
+    const Btn = styled.button`
+      background: red;
+      outline:0;
+      border:0;
+      padding:4px;
+      margin:0 10px;
+      font-weight:bold;
+      color:white;
+    `;
     return (
       <NoSemanticCointainer>
-        {this.context.authenticaded ? <p>Authenticated</p> : <p>Please Log In</p>}
+        {this.context.authenticaded ? (
+          <p>Authenticated</p>
+        ) : (
+          <p>Please Log In</p>
+        )}
         <p>
           I'm {this.props.name} and I am {this.props.age} years old
         </p>
@@ -27,7 +40,7 @@ class Person extends Component {
           value={this.props.name}
           ref={this.componentRef}
         />
-        <button onClick={this.props.click}>Delete Me</button>
+        <Btn onClick={this.props.click}>Delete Me</Btn>
       </NoSemanticCointainer>
     );
   }
