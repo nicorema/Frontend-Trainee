@@ -5,23 +5,23 @@ import classes from "./SideDrawer.module.css";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const SideDrawer = props => {
-  let attachedClasses = [classes.SideDrawer]
-  if(props.open){
+  let attachedClasses = [classes.SideDrawer];
+  if (props.open) {
     attachedClasses.push(classes.Open);
-  }else{
-    attachedClasses.push(classes.Close)
+  } else {
+    attachedClasses.push(classes.Close);
   }
   return (
     <>
       <div className={classes.BackDrop}>
-      <Backdrop show={props.open} closeModal={props.closed}></Backdrop>
+        <Backdrop show={props.open} closeModal={props.closed}></Backdrop>
       </div>
-      <div className={attachedClasses.join(' ')}>
+      <div className={attachedClasses.join(" ") }onClick={props.closed}>
         <div className={classes.Logo}>
           <Logo />
         </div>
         <nav>
-          <NavigationItems />
+          <NavigationItems  isAuthenticated={props.isAuthenticated} />
         </nav>
       </div>
     </>

@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../utility";
+import { updateObject } from "../../shared/utility";
 const INGREDIENT_PRICES = {
   salad: 0.5,
   bacon: 0.4,
@@ -10,7 +10,8 @@ const INGREDIENT_PRICES = {
 const initialState = {
   ingredients: null,
   totalPrice: 4,
-  error: false
+  error: false,
+  building: false
 };
 
 const addIngredient = (state, action) => {
@@ -20,7 +21,8 @@ const addIngredient = (state, action) => {
   const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
   const updatedState = {
     ingredients: updatedIngredients,
-    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientType]
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientType],
+    building: true
   };
   return updateObject(state, updatedState);
 };
@@ -32,22 +34,24 @@ const removeIngredients = (state, action) => {
   const updatedIngs = updateObject(state.ingredients, updatedIng);
   const updatedSt = {
     ingredients: updatedIngs,
-    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientType]
+    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientType],
+    building: true
   };
   return updateObject(state, updatedSt);
 };
-const calculatePrice = (ingredients) => {
+const calculatePrice = ingredients => {
   let price = 0;
-  for(let ing in ingredients){
+  for (let ing in ingredients) {
     price += INGREDIENT_PRICES[ing] * ingredients[ing];
   }
   return initialState.totalPrice + price;
-}
+};
 const setIngredients = (state, action) => {
   return updateObject(state, {
     ingredients: action.ingredients,
     totalPrice: calculatePrice(action.ingredients),
-    error: false
+    error: false,
+    building: false
   });
 };
 
@@ -68,8 +72,10 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.FETCH_INGREDIENTS_FAILED:
       return fetchIngredientsFailed(state, action);
+
+      default:
+        return state;
   }
-  return state;
 };
 
 export default reducer;

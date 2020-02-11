@@ -7,6 +7,7 @@ import Input from "../../../components/UI/Form/Input/Input";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/WithErrorHandler/WithErrorHandler";
 import * as orderActions from "../../../store/actions/index";
+import { updateObject, checkValidity } from "../../../shared/utility";
 class ContactData extends Component {
   state = {
     orderForm: {
@@ -47,7 +48,7 @@ class ContactData extends Component {
           required: true,
           minLength: 5,
           maxLength: 8,
-          inNumeric:true
+          inNumeric: true
         },
         valid: false,
         touched: false
@@ -73,7 +74,7 @@ class ContactData extends Component {
         },
         value: "",
         validation: {
-          isEmail:true,
+          isEmail: true,
           required: true
         },
         valid: false,
@@ -97,6 +98,7 @@ class ContactData extends Component {
   render() {
     let inputs = [];
     for (let key in this.state.orderForm) {
+      let dummy = key;
       let inputElement = this.state.orderForm[key];
       inputs.push(
         <Input
@@ -137,65 +139,31 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      orderData: formData
+      orderData: formData,
+      userId: this.props.userId
     };
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
-  checkValidity(value, rules) {
-    let isValid = true;
-    if (!rules) {
-        return true;
-    }
-    
-    if (rules.required) {
-        isValid = value.trim() !== '' && isValid;
-    }
-
-    if (rules.minLength) {
-        isValid = value.length >= rules.minLength && isValid
-    }
-
-    if (rules.maxLength) {
-        isValid = value.length <= rules.maxLength && isValid
-    }
-
-    if (rules.isEmail) {
-        const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-        isValid = pattern.test(value) && isValid
-    }
-
-    if (rules.isNumeric) {
-        const pattern = /^\d+$/;
-        isValid = pattern.test(value) && isValid
-    }
-
-    return isValid;
-}
-  inputChangeHandler = (event, inputID) => {
-    const updatedOrderForm = {
-      ...this.state.orderForm
-    };
-    const updatedFormElement = { ...updatedOrderForm[inputID] };
-    updatedFormElement.value = event.target.value;
-    updatedFormElement.valid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    );
-    updatedFormElement.touched = true;
-    updatedOrderForm[inputID] = updatedFormElement;
-
-    let formIsValid = true;
-    for (let inputID in updatedOrderForm) {
-      formIsValid = updatedOrderForm[inputID].valid && formIsValid;
-
-      if (!formIsValid) {
-        break;
+  inputChangeHandler = (event, inputIdentifier) => {
+    const updatedFormElement = updateObject(
+      this.state.orderForm[inputIdentifier],
+      {
+        value: event.target.value,
+        valid: checkValidity(
+          event.target.value,
+          this.state.orderForm[inputIdentifier].validation
+        ),
+        touched: true
       }
-    }
-    this.setState({
-      orderForm: updatedOrderForm,
-      formIsValid: formIsValid
+    );
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [inputIdentifier]: updatedFormElement
     });
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 }
 
@@ -203,13 +171,16 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
-    loading: state.orders.loading
+    loading: state.orders.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onOrderBurger: orderData => dispatch(orderActions.purchaseBurger(orderData))
+    onOrderBurger: (orderData, token) =>
+      dispatch(orderActions.purchaseBurger(orderData, token))
   };
 };
 

@@ -11,7 +11,7 @@ const Toolbar = props => (
       </ToggleBtn>
     </span>
     <nav className={classes.DesktopOnly}>
-      <NavigationItems />
+      <NavigationItems isAuthenticated={props.isAuthenticated} />
     </nav>
     <div className={classes.Logo}>
       <Logo />
