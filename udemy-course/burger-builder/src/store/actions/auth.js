@@ -33,9 +33,6 @@ export const auth = (email, password, isSignup) => {
 };
 
 export const logout = () => {
-  // localStorage.removeItem("token");
-  // localStorage.removeItem("expirationDate");
-  // localStorage.removeItem("userID");
   return {
     type: actionTypes.AUTH_INIT_LOGOUT
   };
