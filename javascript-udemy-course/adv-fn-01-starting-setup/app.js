@@ -90,14 +90,13 @@ function getFriendNames(person) {
 console.log(getFriendNames(myself));
 
 function productDescription(strings, productName, productPrice) {
-    console.log(strings);
-    console.log(productName);
-    console.log(productPrice);
-    let priceCategory = 'cheap';
-    if(productPrice > 20){
-        let priceCategory = 'fair';
-        
-    }
+  console.log(strings);
+  console.log(productName);
+  console.log(productPrice);
+  let priceCategory = 'cheap';
+  if (productPrice > 20) {
+    let priceCategory = 'fair';
+  }
   return `${strings[0]}${productName}${strings[1]}${priceCategory}${strings[2]}`;
 }
 
