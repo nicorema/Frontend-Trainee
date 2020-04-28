@@ -48,43 +48,60 @@ function powerOff(x, n) {
 console.log(powerOff(2, 3));
 
 const myself = {
-    name: 'Max',
-    friends: [
-      {
-        name: 'Manuel',
-        friends: [
-          {
-            name: 'Chris',
-            friends: [
-              {
-                name: 'Hari'
-              },
-              {
-                name: 'Amilia'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Julia'
-      }
-    ]
-  };
-  
-  function getFriendNames(person) {
-    const collectedNames = [];
-  
-    if (!person.friends) {
-      return [];
-    }
-    
-    for (const friend of person.friends) {
-      collectedNames.push(friend.name);
-      collectedNames.push(...getFriendNames(friend));
-    }
-    
-    return collectedNames;
+  name: 'Max',
+  friends: [
+    {
+      name: 'Manuel',
+      friends: [
+        {
+          name: 'Chris',
+          friends: [
+            {
+              name: 'Hari',
+            },
+            {
+              name: 'Amilia',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Julia',
+    },
+  ],
+};
+
+function getFriendNames(person) {
+  const collectedNames = [];
+
+  if (!person.friends) {
+    return [];
   }
-  
-  console.log(getFriendNames(myself));
+
+  for (const friend of person.friends) {
+    collectedNames.push(friend.name);
+    collectedNames.push(...getFriendNames(friend));
+  }
+
+  return collectedNames;
+}
+
+console.log(getFriendNames(myself));
+
+function productDescription(strings, productName, productPrice) {
+    console.log(strings);
+    console.log(productName);
+    console.log(productPrice);
+    let priceCategory = 'cheap';
+    if(productPrice > 20){
+        let priceCategory = 'fair';
+        
+    }
+  return `${strings[0]}${productName}${strings[1]}${priceCategory}${strings[2]}`;
+}
+
+const prodName = 'Js Course';
+const prodPrice = '29.99';
+const productOutPut = productDescription`This product (${prodName}) is ${prodPrice}.`;
+console.log(productOutPut);
