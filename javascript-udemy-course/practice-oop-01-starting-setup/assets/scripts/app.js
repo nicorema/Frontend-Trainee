@@ -80,6 +80,18 @@ class ProjectItem {
     this.updateProjectListHandler = updateProjectListHandler;
     this.connectSwitchButton(type);
     this.connectMoreInfoButton();
+    this.connectDrag();
+  }
+
+  connectDrag() {
+    const item = document.getElementById(this.id);
+    item.addEventListener('dragstart', event => {
+      event.dataTransfer.setData('text/plain', this.id);
+      event.dataTransfer.effectAllowed = 'move';
+    });
+    item.addEventListener('dragend', event => {
+      console.log(event);
+    });
   }
 
   connectSwitchButton(type) {
@@ -132,6 +144,43 @@ class ProjectList {
         new ProjectItem(item.id, this.switchProject.bind(this), this.type)
       );
     }
+    this.connectDroppable();
+  }
+
+  connectDroppable() {
+    const list = document.querySelector(`#${this.type}-projects ul`);
+    list.addEventListener('dragenter', event => {
+      if (event.dataTransfer.types[0] === 'text/plain') {
+        event.preventDefault();
+        list.parentElement.classList.add('droppable');
+      }
+    });
+    list.addEventListener('dragover', event => {
+      if (event.dataTransfer.types[0] === 'text/plain') {
+        event.preventDefault();
+      }
+    });
+    list.addEventListener('dragleave', event => {
+      if (
+        event.relatedTarget.closest &&
+        event.relatedTarget.closest(`#${this.type}-projects ul`) !== list
+      ) {
+        list.parentElement.classList.remove('droppable');
+      }
+    });
+    list.addEventListener('drop', event => {
+      event.preventDefault();
+      const prjId = event.dataTransfer.getData('text/plain');
+      list.parentElement.classList.remove('droppable');
+      if (this.projects.find(p => p.id === prjId)) {
+        return;
+      }
+      document
+        .getElementById(prjId)
+        .querySelector('button:last-of-type')
+        .click();
+      //event.preventDefault();
+    });
   }
 
   setSwitchHandler(switchHandler) {
@@ -165,18 +214,17 @@ class App {
     const analyticsTimeout = setTimeout(this.startAnalytics, 3000);
     document
       .getElementById('stop-analytics-btn')
-      .addEventListener('click',()=>{
+      .addEventListener('click', () => {
         clearTimeout(analyticsTimeout);
       });
   }
-  
 
-  static startAnalytics() {
-    const analyticsScript = document.createElement('script');
-    analyticsScript.src = 'assets/scripts/analytics.js';
-    analyticsScript.defer = true;
-    document.head.append(analyticsScript);
-  }
+  // static startAnalytics() {
+  //   const analyticsScript = document.createElement('script');
+  //   analyticsScript.src = 'assets/scripts/analytics.js';
+  //   analyticsScript.defer = true;
+  //   document.head.append(analyticsScript);
+  // }
 }
 
 App.init();
