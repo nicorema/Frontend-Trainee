@@ -47,11 +47,10 @@ function sendHttpRequest(method, url, data) {
 async function fetchPosts() {
   try {
     listElement.innerHTML = '';
-    const responseData = await sendHttpRequest(
-      'GET',
+    const response = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     );
-    const posts = responseData;
+    const posts = response.data;
     for (post of posts) {
       const postEl = document.importNode(postTemplate.content, true);
       postEl.querySelector('h2').textContent = post.title.toUpperCase();
@@ -73,10 +72,14 @@ async function createPost(title, content) {
   };
 
   const fd = new FormData(form);
-//   fd.append('title', title);
-//   fd.append('body', content);
-//   fd.append('userId', userId);
-  sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', fd);
+  //   fd.append('title', title);
+  //   fd.append('body', content);
+  //   fd.append('userId', userId);
+  const response = await axios.post(
+    'https://jsonplaceholder.typicode.com/posts/',
+    post
+  );
+  console.log(response);
 }
 
 fetchBtn.addEventListener('click', fetchPosts);
@@ -90,9 +93,6 @@ form.addEventListener('submit', event => {
 listElement.addEventListener('click', event => {
   if (event.target.tagName === 'BUTTON') {
     const postId = event.target.closest('li').id;
-    sendHttpRequest(
-      'DELETE',
-      'https://jsonplaceholder.typicode.com/posts/' + postId
-    );
+    axios.delete('https://jsonplaceholder.typicode.com/posts/' + postId);
   }
 });
