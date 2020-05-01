@@ -1,4 +1,4 @@
-import Component from './Component.js';
+import Component from './Component';
 
 export class ToolTip extends Component {
   constructor(closeNotifierHandler, toolTipText, hostElementId) {
@@ -7,10 +7,12 @@ export class ToolTip extends Component {
     this.closeNotifierHandler = closeNotifierHandler;
     this.createToolTip();
   }
+
   closeToolTip() {
     this.detach();
     this.closeNotifierHandler();
   }
+
   createToolTip() {
     const toolTipElement = document.createElement('div');
     toolTipElement.classList.add('card');
