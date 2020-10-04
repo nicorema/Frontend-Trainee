@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders correctly 1`] = `
+<div
+  className="css-1mjppp"
+>
+  <header
+    className="sc-dlnjPT eSGkCO"
+  >
+    <h1>
+      test title
+    </h1>
+    <div
+      className="sc-gtssRu loStDX"
+    >
+      <button
+        onClick={[MockFunction]}
+      />
+    </div>
+  </header>
+  <p>
+    Testing child
+  </p>
+  <footer
+    className="css-1ty9u91"
+  >
+    <nav
+      className="sc-bdnylx giuwNz"
+    >
+      <ul>
+        <li>
+          <span
+            className="css-qyfojd"
+          >
+            <a
+              href="/todos-manager"
+            >
+              Todos Manager
+            </a>
+          </span>
+        </li>
+        <li>
+          <span
+            className="css-qyfojd"
+          >
+            <a
+              href="/todos-log"
+            >
+              Todos Log
+            </a>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+`;

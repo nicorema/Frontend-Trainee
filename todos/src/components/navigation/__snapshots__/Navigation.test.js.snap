@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation renders correctly 1`] = `
+<nav
+  className="sc-bdnylx giuwNz"
+>
+  <ul>
+    <li>
+      <span
+        className="css-qyfojd"
+      >
+        <a
+          href="/todos-manager"
+        >
+          Todos Manager
+        </a>
+      </span>
+    </li>
+    <li>
+      <span
+        className="css-qyfojd"
+      >
+        <a
+          href="/todos-log"
+        >
+          Todos Log
+        </a>
+      </span>
+    </li>
+  </ul>
+</nav>
+`;

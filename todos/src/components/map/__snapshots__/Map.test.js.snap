@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomMarker renders correctly 1`] = `
+<div
+  className="sc-bdnylx kJaJen"
+>
+  <div
+    onClick={[Function]}
+    onMouseDownCapture={[Function]}
+    onMouseMove={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "margin": 0,
+        "padding": 0,
+        "position": "relative",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "height": "100%",
+          "left": 0,
+          "margin": 0,
+          "padding": 0,
+          "position": "absolute",
+          "top": 0,
+          "width": "100%",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "height": "50%",
+          "left": "50%",
+          "margin": 0,
+          "padding": 0,
+          "position": "absolute",
+          "top": "50%",
+          "width": "50%",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "height": "100%",
+            "left": 0,
+            "margin": 0,
+            "padding": 0,
+            "position": "absolute",
+            "top": 0,
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "height": 0,
+              "left": 17.729672533343546,
+              "position": "absolute",
+              "top": -68.86462388547079,
+              "width": 0,
+            }
+          }
+        >
+          <div
+            className="sc-gtssRu kBNPkW"
+            data-testid="customMarker"
+            data-testlocation={
+              Object {
+                "lat": 4.718592,
+                "lng": -74.039296,
+              }
+            }
+          >
+            <p>
+              test todo 0
+            </p>
+            <svg
+              height="20pt"
+              viewBox="0 0 32 32"
+              width="20pt"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="M24.332 16.934l7.535 10.199C26.2 29 13.133 28.602 8.067 26V7.867c5 2.598 18.132 3.067 23.8 1.133zm0 0"
+                  fill="#FC644F"
+                />
+                <path
+                  d="M8.066 25.934l4.067-2-3-9.067-1.067 1.531zm0 0"
+                  fill="#F1543F"
+                />
+                <path
+                  d="M2.535 2.934V21s4.73-1.266 9.531 2.867v-18c-4.8-4.199-9.53-2.933-9.53-2.933zm0 0"
+                  fill="#FF7058"
+                />
+                <path
+                  d="M2 0C1 0 .133.8.133 1.8V32H3.8V1.8C3.8.8 3 0 2 0zm0 0"
+                  fill="#40596B"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "height": 0,
+              "left": 18.457850311111542,
+              "position": "absolute",
+              "top": -69.59527856207569,
+              "width": 0,
+            }
+          }
+        >
+          <div
+            className="sc-gtssRu kBNPkW"
+            data-testid="customMarker"
+            data-testlocation={
+              Object {
+                "lat": 4.7195920000000005,
+                "lng": -74.03829599999999,
+              }
+            }
+          >
+            <p>
+              test todo 1
+            </p>
+            <svg
+              height="20pt"
+              viewBox="0 0 32 32"
+              width="20pt"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="M24.332 16.934l7.535 10.199C26.2 29 13.133 28.602 8.067 26V7.867c5 2.598 18.132 3.067 23.8 1.133zm0 0"
+                  fill="#FC644F"
+                />
+                <path
+                  d="M8.066 25.934l4.067-2-3-9.067-1.067 1.531zm0 0"
+                  fill="#F1543F"
+                />
+                <path
+                  d="M2.535 2.934V21s4.73-1.266 9.531 2.867v-18c-4.8-4.199-9.53-2.933-9.53-2.933zm0 0"
+                  fill="#FF7058"
+                />
+                <path
+                  d="M2 0C1 0 .133.8.133 1.8V32H3.8V1.8C3.8.8 3 0 2 0zm0 0"
+                  fill="#40596B"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "height": 0,
+              "left": 106999.38929777779,
+              "position": "absolute",
+              "top": -10783.683432512524,
+              "width": 0,
+            }
+          }
+        >
+          <div
+            className="sc-gtssRu kBNPkW"
+            data-testid="customMarker"
+            data-testlocation={
+              Object {
+                "lat": 19.075984,
+                "lng": 72.877656,
+              }
+            }
+          >
+            <p>
+              test todo 2
+            </p>
+            <svg
+              height="20pt"
+              viewBox="0 0 32 32"
+              width="20pt"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="M24.332 16.934l7.535 10.199C26.2 29 13.133 28.602 8.067 26V7.867c5 2.598 18.132 3.067 23.8 1.133zm0 0"
+                  fill="#FC644F"
+                />
+                <path
+                  d="M8.066 25.934l4.067-2-3-9.067-1.067 1.531zm0 0"
+                  fill="#F1543F"
+                />
+                <path
+                  d="M2.535 2.934V21s4.73-1.266 9.531 2.867v-18c-4.8-4.199-9.53-2.933-9.53-2.933zm0 0"
+                  fill="#FF7058"
+                />
+                <path
+                  d="M2 0C1 0 .133.8.133 1.8V32H3.8V1.8C3.8.8 3 0 2 0zm0 0"
+                  fill="#40596B"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

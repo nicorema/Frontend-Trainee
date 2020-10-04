@@ -1,0 +1,13 @@
+{
+  "index.title": "Todo App",
+  "index.personalInfo.title": "Serempre React.JS technical test",
+  "index.personalInfo.createdBy": "By: ",
+  "index.personalInfo.email": "Email: ",
+  "todos.log.title": "Todos Log",
+  "todos.manager.title": "Todos Manager",
+  "todos.manager.location.error": "Something went wrong, your location cannot be registered.",
+  "todos.manager.create.label": "Create New Todo",
+  "todos.prompt.todo.description.label": "Todo Description:",
+  "todos.prompt.todo.description.placeholder": "Description",
+  "todos.prompt.todo.create.label": "Confirm"
+}

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoPromp renders correctly 1`] = `
+Array [
+  <div
+    className="sc-gtssRu iupHtr"
+    data-testid="close-prompt"
+    onClick={[MockFunction]}
+  />,
+  <form
+    className="sc-dlnjPT jaFted"
+    data-testid="create-todo"
+    onSubmit={[Function]}
+  >
+    <label
+      className="css-1nncrbt"
+      htmlFor="description"
+    >
+      Información del Todo
+    </label>
+    <textarea
+      className="css-16gg0af"
+      data-testid="todo-description-input"
+      id="description"
+      onChange={[Function]}
+      placeholder="Descripción del Todo"
+      required={true}
+      value="Loren Ipsum"
+    />
+    <div
+      className="sc-bdnylx fXrGza"
+    >
+      <button>
+        Confirmar
+      </button>
+    </div>
+  </form>,
+]
+`;

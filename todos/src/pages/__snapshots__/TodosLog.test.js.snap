@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Todos Log Page renders correctly 1`] = `
+<div
+  className="css-1mjppp"
+>
+  <header
+    className="sc-dlnjPT eSGkCO"
+  >
+    <h1>
+      Todos Log
+    </h1>
+  </header>
+  <div>
+    <div
+      className="sc-hKFyIo fwSFRg"
+    >
+      <div
+        onClick={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseMove={[Function]}
+        style={
+          Object {
+            "height": "100%",
+            "margin": 0,
+            "padding": 0,
+            "position": "relative",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "height": "100%",
+              "left": 0,
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "height": "50%",
+              "left": "50%",
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": "50%",
+              "width": "50%",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "left": 0,
+                "margin": 0,
+                "padding": 0,
+                "position": "absolute",
+                "top": 0,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="css-1ty9u91"
+  >
+    <nav
+      className="sc-bdnylx giuwNz"
+    >
+      <ul>
+        <li>
+          <span
+            className="css-qyfojd"
+          >
+            <a
+              href="/todos-manager"
+            >
+              Todos Manager
+            </a>
+          </span>
+        </li>
+        <li>
+          <span
+            className="css-qyfojd"
+          >
+            <a
+              href="/todos-log"
+            >
+              Todos Log
+            </a>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </footer>
+</div>
+`;

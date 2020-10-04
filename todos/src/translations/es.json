@@ -1,0 +1,13 @@
+{
+  "index.title": "Todo App",
+  "index.personalInfo.title": "Serempre prueba tecnica React.JS",
+  "index.personalInfo.createdBy": "Por: ",
+  "index.personalInfo.email": "Email: ",
+  "todos.log.title": "Todos Log",
+  "todos.manager.title": "Todos Manager",
+  "todos.manager.location.error": "Algo salió mal, tu ubicación no se podrá registrar.",
+  "todos.manager.create.label": "Crear nuevo Todo",
+  "todos.prompt.todo.description.label": "Descripción del Todo:",
+  "todos.prompt.todo.description.placeholder": "Descripción...",
+  "todos.prompt.todo.create.label": "Confirmar"
+}
