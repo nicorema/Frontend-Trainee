@@ -1,0 +1,15 @@
+.main-box {
+  border: solid 1px burlywood;
+  display: inline-block;
+  margin: 16px;
+  padding: 3px 6px 12px 18px;
+}
+
+.main-box:last-child:hover {
+  background: cadetblue;
+}
+
+.main-box-1 {
+  height: 300px;
+  width: 50%;
+}
