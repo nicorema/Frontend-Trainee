@@ -8,14 +8,14 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <h1>Infinite SWAPI</h1>
-      <QueryClientProvider client={queryClient}>
-        <InfinitePeople />
-        {/* <InfiniteSpecies /> */}
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <h1>Infinite SWAPI</h1>
+        {/* <InfinitePeople /> */}
+        <InfiniteSpecies />
         <ReactQueryDevtools />
-      </QueryClientProvider>
-    </div>
+      </div>
+    </QueryClientProvider>
   );
 }
 
