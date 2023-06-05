@@ -1,9 +1,39 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import {
+    createEventDispatcher,
+    onMount,
+    onDestroy,
+    beforeUpdate,
+    afterUpdate,
+  } from "svelte";
 
   let agreed = false;
+  let autoScroll = false;
   const dispatch = createEventDispatcher();
   const onClose = () => dispatch("close");
+
+  onMount(() => {
+    console.log("onMount");
+  });
+
+  onDestroy(() => {
+    console.log("onDestroy");
+  });
+
+  beforeUpdate(() => {
+    console.log("beforeUpdate");
+    autoScroll = agreed;
+  });
+
+  afterUpdate(() => {
+    console.log("afterUpdate");
+    if (autoScroll) {
+      const modal = document.querySelector(".modal");
+      modal.scrollTo(0, modal.scrollHeight);
+    }
+  });
+
+  console.log("Executed");
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
