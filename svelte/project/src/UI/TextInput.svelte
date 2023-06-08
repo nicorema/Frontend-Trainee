@@ -8,9 +8,9 @@
 <div class="form-control">
   <label for={id}>{label}</label>
   {#if type === "textarea"}
-    <textarea rows="3" {id} {value} />
+    <textarea rows="3" {id} {value} on:input />
   {:else}
-    <input {type} {id} {value} />
+    <input {type} {id} {value} on:input />
   {/if}
 </div>
 
