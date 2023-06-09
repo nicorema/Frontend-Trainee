@@ -3,12 +3,15 @@
   export let href = null;
   export let mode = null;
   export let color = null;
+  export let disabled = false;
 </script>
 
 {#if href}
   <a {href}><slot /></a>
 {:else}
-  <button {type} class={`${mode} ${color}`} on:click> <slot /></button>
+  <button {disabled} {type} class={`${mode} ${color}`} on:click>
+    <slot /></button
+  >
 {/if}
 
 <style>
