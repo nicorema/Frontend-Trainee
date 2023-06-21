@@ -45,7 +45,7 @@
 
   const dispatch = createEventDispatcher();
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const meetupData = {
       title,
       subtitle,
@@ -56,16 +56,68 @@
     };
 
     if (id) {
-      meetups.updateMeetup(id, meetupData);
+      try {
+        const response = await fetch(
+          `https://svelte-course-2efdc-default-rtdb.firebaseio.com/meetups/${id}.json/`,
+          {
+            method: "PATCH",
+            body: JSON.stringify(meetupData),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("An error ocurred, please try again");
+        }
+
+        const data = await response.json();
+        meetups.updateMeetup(id, meetupData);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        dispatch("cancel");
+      }
     } else {
-      meetups.addMeetup(meetupData);
+      try {
+        const response = await fetch(
+          "https://svelte-course-2efdc-default-rtdb.firebaseio.com/meetups.json/",
+          {
+            method: "POST",
+            body: JSON.stringify({ ...meetupData, isFavorite: false }),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("An error ocurred, please try again");
+        }
+
+        const data = await response.json();
+        meetups.addMeetup({ id: data.name, ...meetupData, isFavorite: false });
+      } catch (err) {
+        console.error(err);
+      } finally {
+        dispatch("cancel");
+      }
     }
-    dispatch("cancel");
   };
 
-  const deleteMeetup = () => {
-    meetups.deleteMeetup(id);
-    dispatch("cancel");
+  const deleteMeetup = async () => {
+    try {
+      const response = await fetch(
+        `https://svelte-course-2efdc-default-rtdb.firebaseio.com/meetups/${id}.json/`,
+        { method: "DELETE" }
+      );
+
+      if (!response.ok) {
+        throw new Error("An error ocurred, please try again");
+      }
+      meetups.deleteMeetup(id);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      dispatch("cancel");
+    }
   };
 </script>
 

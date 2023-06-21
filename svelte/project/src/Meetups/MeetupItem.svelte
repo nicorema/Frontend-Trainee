@@ -12,7 +12,31 @@
   export let address;
   export let isFavorite;
 
+  let isLoading = false;
   const dispatch = createEventDispatcher();
+
+  const toggleFavorite = async () => {
+    isLoading = true;
+    try {
+      const response = await fetch(
+        `https://svelte-course-2efdc-default-rtdb.firebaseio.com/meetups/${id}.json/`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ isFavorite: !isFavorite }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("An error ocurred, please try again");
+      }
+      meetups.toggleFavorite(id);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      isLoading = false;
+    }
+  };
 </script>
 
 <article>
@@ -40,12 +64,16 @@
     <Button mode="outline" type="button" on:click={() => dispatch("edit", id)}
       >Edit</Button
     >
-    <Button
-      mode="outline"
-      color={isFavorite ? null : "success"}
-      on:click={() => meetups.toggleFavorite(id)}
-      >{isFavorite ? "Unfavorite" : "Favorite"}</Button
-    >
+    {#if isLoading}
+      <span>Changing...</span>
+    {:else}
+      <Button
+        mode="outline"
+        color={isFavorite ? null : "success"}
+        on:click={toggleFavorite}
+        >{isFavorite ? "Unfavorite" : "Favorite"}</Button
+      >
+    {/if}
     <Button on:click={() => dispatch("showdetails", id)}>Show Details</Button>
   </footer>
 </article>

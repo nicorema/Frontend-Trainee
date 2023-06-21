@@ -5,11 +5,39 @@
   import Header from "./UI/Header.svelte";
   import meetups from "./Meetups/meetup-store";
   import MeetupDetail from "./Meetups/MeetupDetail.svelte";
+  import { onMount } from "svelte";
+  import LoadingSpinner from "./UI/LoadingSpinner.svelte";
+  import Error from "./UI/Error.svelte";
 
   let editMode = null;
   let editedId = null;
   let page = "overview";
   let pageData = {};
+  let isLoading = true;
+  let error;
+
+  onMount(async () => {
+    try {
+      const response = await fetch(
+        "https://svelte-course-2efdc-default-rtdb.firebaseio.com/meetups.json/"
+      );
+
+      if (!response.ok) {
+        throw new Error("An error ocurred, please try again");
+      }
+
+      const data = await response.json();
+      const loadedMeetups = [];
+      for (const key in data) {
+        loadedMeetups.push({ ...data[key], id: key });
+      }
+      meetups.setMeetups(loadedMeetups.reverse());
+    } catch (err) {
+      error = err;
+    } finally {
+      isLoading = false;
+    }
+  });
 
   const cancelEdit = () => {
     editMode = null;
@@ -30,12 +58,20 @@
   };
 </script>
 
+{#if error}
+  <Error message={error.message} on:cancel={() => (error = null)} />
+{/if}
+
 <Header />
 
 <main>
   {#if page === "overview"}
     {#if editMode === "add" || editMode === "edit"}
       <EditMeetup on:cancel={cancelEdit} id={editedId} />
+    {/if}
+
+    {#if isLoading}
+      <LoadingSpinner />
     {/if}
     <MeetupGrid
       meetups={$meetups}
